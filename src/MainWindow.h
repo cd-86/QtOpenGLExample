@@ -27,7 +27,6 @@ private:
     Ui::MainWindow *ui;
     QStandardItemModel *m_model;
     QWidget *w {nullptr};
-
 };
 
 #endif // MAINWINDOW_H

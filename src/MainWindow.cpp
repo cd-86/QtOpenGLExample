@@ -1,13 +1,14 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
-#include "CreateOpenGLWindow/CreateOpenGLWindowExample.h"
-#include "HelloTriangle/HelloTriangleExample.h"
-#include "Shaders/ShadersExample.h"
-#include "Textures/TexturesExample.h"
-#include "Transformations/TransformationsExample.h"
-#include "CoordinateSystems/CoordinateSystemsExample.h"
-#include "Camera/CameraExample.h"
+#include "CreateOpenGLWindowExample/CreateOpenGLWindowExample.h"
+#include "HelloTriangleExample/HelloTriangleExample.h"
+#include "ShadersExample/ShadersExample.h"
+#include "TexturesExample/TexturesExample.h"
+#include "TransformationsExample/TransformationsExample.h"
+#include "CoordinateSystemsExample/CoordinateSystemsExample.h"
+#include "CameraExample/CameraExample.h"
+#include "ColorsExample/ColorsExample.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_model->appendRow(new QStandardItem("Transformations"));
     m_model->appendRow(new QStandardItem("Coordinate Systems"));
     m_model->appendRow(new QStandardItem("Camera"));
+    m_model->appendRow(new QStandardItem("Colors"));
 }
 
 MainWindow::~MainWindow()
@@ -57,6 +59,9 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
         break;
     case 6:
         newWindow = new CameraExample;
+        break;
+    case 7:
+        newWindow = new ColorsExample;
         break;
     }
     if (newWindow){

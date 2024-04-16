@@ -6,7 +6,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLWidget>
-#include <QTime>
+#include <QElapsedTimer>
 
 class Q_DECL_EXPORT ShadersExample : public QOpenGLWidget
 {
@@ -27,7 +27,7 @@ public:
     QOpenGLBuffer vbo;
     QOpenGLVertexArrayObject vao;
     QColor color;
-    QTime time;
+    QElapsedTimer time;
 };
 
 #endif // SHADERSEXAMPLE_H

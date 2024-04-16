@@ -55,9 +55,6 @@ public:
     float yaw   = 0.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
     float pitch =  0.0f;
     float fov   =  45.0f;
-    // timing
-    float deltaTime = 0.0f;	// time between current frame and last frame
-    float lastFrame = 0.0f;
     QVector<QVector3D> cubePositions;
     QElapsedTimer time;
     struct {

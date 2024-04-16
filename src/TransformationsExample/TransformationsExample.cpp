@@ -69,7 +69,7 @@ void TransformationsExample::initializeGL()
     shaderProgram.setAttributeBuffer(0, GL_FLOAT, 0, 3, 5 * sizeof(float));
     shaderProgram.enableAttributeArray(1);
     shaderProgram.setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(float), 2, 5 * sizeof(float));
-    startTimer(20);
+    startTimer(1);
 }
 
 void TransformationsExample::resizeGL(int w, int h)

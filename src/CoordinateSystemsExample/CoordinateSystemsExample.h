@@ -1,5 +1,5 @@
-#ifndef TRANSFORMATIONSEXAMPLE_H
-#define TRANSFORMATIONSEXAMPLE_H
+#ifndef COORDINATESYSTEMSEXAMPLE_H
+#define COORDINATESYSTEMSEXAMPLE_H
 
 #include <QtCore/qglobal.h>
 #include <QOpenGLBuffer>
@@ -7,13 +7,13 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLTexture>
 #include <QOpenGLWidget>
-#include <QTime>
+#include <QElapsedTimer>
 
-class Q_DECL_EXPORT TransformationsExample : public QOpenGLWidget
+class Q_DECL_EXPORT CoordinateSystemsExample : public QOpenGLWidget
 {
 public:
-    TransformationsExample(QWidget *parent = nullptr);
-    ~TransformationsExample();
+    CoordinateSystemsExample(QWidget *parent = nullptr);
+    ~CoordinateSystemsExample();
 
 protected:
     // QObject interface
@@ -26,13 +26,14 @@ protected:
 public:
     QOpenGLShaderProgram shaderProgram;
     QOpenGLBuffer vbo;
-    QOpenGLBuffer ebo {QOpenGLBuffer(QOpenGLBuffer::IndexBuffer)};
     QOpenGLVertexArrayObject vao;
     QOpenGLTexture *texture1;
     QOpenGLTexture *texture2;
-    QMatrix4x4 trans;
-    QTime time;
+    QMatrix4x4 projection;
+    QMatrix4x4 view;
+    QElapsedTimer time;
+    QVector<QVector3D> cubePositions;
 
 };
 
-#endif // TRANSFORMATIONSEXAMPLE_H
+#endif // COORDINATESYSTEMSEXAMPLE_H

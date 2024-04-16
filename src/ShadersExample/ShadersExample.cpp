@@ -68,7 +68,7 @@ void ShadersExample::initializeGL()
     shaderProgram.enableAttributeArray(0);
     shaderProgram.setAttributeBuffer(0, GL_FLOAT, 0, 3, 3 * sizeof(float));
     // 启动计时器
-    startTimer(20);
+    startTimer(1);
 }
 
 void ShadersExample::resizeGL(int w, int h)

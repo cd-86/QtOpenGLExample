@@ -7,8 +7,6 @@
 
 CameraExample::CameraExample(QWidget *parent)
 {
-    view.translate(0.0f, 0.0f, -3.0f);
-
     cubePositions << QVector3D( 0.0f,  0.0f,  0.0f)
                   << QVector3D( 2.0f,  5.0f, -15.0f)
                   << QVector3D(-1.5f, -2.2f, -2.5f)
@@ -61,7 +59,6 @@ void CameraExample::leaveEvent(QEvent *event)
 
 void CameraExample::mouseMoveEvent(QMouseEvent *event)
 {
-
     float xoffset = rect().center().x() - event->x();
     float yoffset = rect().center().y() - event->y();
 
@@ -80,9 +77,9 @@ void CameraExample::mouseMoveEvent(QMouseEvent *event)
     // 使用四元数计算当前相机看向的方向
     cameraFront = QQuaternion::fromEulerAngles(pitch, yaw, 0) * QVector3D(0.0f, 0.0f, -1.0f);
 
-    view.setToIdentity();
-    view.lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-    update();
+    // view.setToIdentity();
+    // view.lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+    // update();
     // 将指针置于窗口中心
     QCursor::setPos(mapToGlobal(rect().center()));
 }
@@ -96,7 +93,7 @@ void CameraExample::wheelEvent(QWheelEvent *event)
         fov = 45.0f;
     projection.setToIdentity();
     projection.perspective(fov, float(width()) / float(height()), 0.1f, 100.f);
-    update();
+    // update();
 }
 
 void CameraExample::keyPressEvent(QKeyEvent *event)
@@ -116,10 +113,6 @@ void CameraExample::keyPressEvent(QKeyEvent *event)
         break;
     default:
         return;
-    }
-    if (!timerID){
-        timerID = startTimer(1);
-        time.restart();
     }
 }
 
@@ -141,10 +134,6 @@ void CameraExample::keyReleaseEvent(QKeyEvent *event)
     default:
         return;
     }
-    if (!(keys.W || keys.S || keys.A || keys.D)) {
-        killTimer(timerID);
-        timerID = 0;
-    }
 }
 
 void CameraExample::initializeGL()
@@ -157,9 +146,9 @@ void CameraExample::initializeGL()
     QOpenGLFunctions *f = context()->functions();
     f->glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     // 顶点着色器
-    shaderProgram.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/coordinate_systems/texture.vs");
+    shaderProgram.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/camera/texture.vs");
     // 片段着色器
-    shaderProgram.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/coordinate_systems/texture.fs");
+    shaderProgram.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/camera/texture.fs");
     // 编译链接
     if(!shaderProgram.link()) {
         qDebug() << shaderProgram.log();
@@ -217,6 +206,7 @@ void CameraExample::initializeGL()
     shaderProgram.setAttributeBuffer(0, GL_FLOAT, 0, 3, 5 * sizeof(float));
     shaderProgram.enableAttributeArray(1);
     shaderProgram.setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(float), 2, 5 * sizeof(float));
+    startTimer(1);
 }
 
 void CameraExample::resizeGL(int w, int h)
