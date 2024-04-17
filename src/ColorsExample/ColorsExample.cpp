@@ -5,7 +5,8 @@
 #include <QPainter>
 #include <QtMath>
 
-ColorsExample::ColorsExample(QWidget *parent)
+ColorsExample::ColorsExample(QWidget *parent) :
+    QOpenGLWidget(parent)
 {
     view.translate(0.0f, 0.0f, -3.0f);
 

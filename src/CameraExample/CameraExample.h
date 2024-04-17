@@ -12,7 +12,7 @@
 #ifndef CAMERAEXAMPLE_H
 #define CAMERAEXAMPLE_H
 
-#include <QtCore/qglobal.h>
+#include "CameraExample_global.h"
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
@@ -20,8 +20,9 @@
 #include <QOpenGLWidget>
 #include <QElapsedTimer>
 
-class Q_DECL_EXPORT CameraExample : public QOpenGLWidget
+class CAMERAEXAMPLE_EXPORT CameraExample : public QOpenGLWidget
 {
+    Q_OBJECT
 public:
     CameraExample(QWidget *parent = nullptr);
     ~CameraExample();

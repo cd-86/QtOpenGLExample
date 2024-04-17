@@ -1,15 +1,16 @@
 #ifndef SHADERSEXAMPLE_H
 #define SHADERSEXAMPLE_H
 
-#include <QtCore/qglobal.h>
+#include "ShadersExample_global.h"
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLWidget>
 #include <QElapsedTimer>
 
-class Q_DECL_EXPORT ShadersExample : public QOpenGLWidget
+class SHADERSEXAMPLE_EXPORT ShadersExample : public QOpenGLWidget
 {
+    Q_OBJECT
 public:
     ShadersExample(QWidget *parent = nullptr);
     ~ShadersExample();

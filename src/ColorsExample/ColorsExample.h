@@ -1,7 +1,7 @@
 #ifndef COLORSEXAMPLE_H
 #define COLORSEXAMPLE_H
 
-#include <QtCore/qglobal.h>
+#include "ColorsExample_global.h"
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
@@ -10,10 +10,11 @@
 
 #include "Camera.h"
 
-class Q_DECL_EXPORT ColorsExample : public QOpenGLWidget
+class COLORSEXAMPLE_EXPORT ColorsExample : public QOpenGLWidget
 {
+    Q_OBJECT
 public:
-    ColorsExample(QWidget *parent = nullptr);
+    explicit ColorsExample(QWidget *parent = nullptr);
     ~ColorsExample();
 
 protected:

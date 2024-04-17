@@ -1,15 +1,16 @@
 #ifndef TEXTURESEXAMPLE_H
 #define TEXTURESEXAMPLE_H
 
-#include <QtCore/qglobal.h>
+#include "TexturesExample_global.h"
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLTexture>
 #include <QOpenGLWidget>
 
-class Q_DECL_EXPORT TexturesExample : public QOpenGLWidget
+class TEXTURESEXAMPLE_EXPORT TexturesExample : public QOpenGLWidget
 {
+    Q_OBJECT
 public:
     TexturesExample(QWidget *parent = nullptr);
     ~TexturesExample();

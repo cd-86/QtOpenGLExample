@@ -1,12 +1,12 @@
 #ifndef CREATEOPENGLWINDOWEXAMPLE_H
 #define CREATEOPENGLWINDOWEXAMPLE_H
 
-#include <QtCore/qglobal.h>
+#include "CreateOpenGLWindowExample_global.h"
 #include <QOpenGLWidget>
 
-class Q_DECL_EXPORT CreateOpenGLWindowExample : public QOpenGLWidget
+class CREATEOPENGLWINDOWEXAMPLE_EXPORT CreateOpenGLWindowExample : public QOpenGLWidget
 {
-    // Q_OBJECT
+    Q_OBJECT
 
 public:
     CreateOpenGLWindowExample(QWidget *parent = nullptr);

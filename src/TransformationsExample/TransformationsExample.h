@@ -1,7 +1,7 @@
 #ifndef TRANSFORMATIONSEXAMPLE_H
 #define TRANSFORMATIONSEXAMPLE_H
 
-#include <QtCore/qglobal.h>
+#include "TransformationsExample_global.h"
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
@@ -9,8 +9,9 @@
 #include <QOpenGLWidget>
 #include <QElapsedTimer>
 
-class Q_DECL_EXPORT TransformationsExample : public QOpenGLWidget
+class TRANSFORMATIONSEXAMPLE_EXPORT TransformationsExample : public QOpenGLWidget
 {
+    Q_OBJECT
 public:
     TransformationsExample(QWidget *parent = nullptr);
     ~TransformationsExample();

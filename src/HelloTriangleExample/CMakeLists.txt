@@ -1,6 +1,7 @@
 project(HelloTriangleExample)
 
 set(HDRS
+    HelloTriangleExample_global.h
     HelloTriangleExample.h
 )
 
@@ -13,3 +14,5 @@ add_library(HelloTriangleExample SHARED
 )
 
 target_link_libraries(HelloTriangleExample PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+target_compile_definitions(HelloTriangleExample PRIVATE HELLOTRIANGLEEXAMPLE_LIBRARY)

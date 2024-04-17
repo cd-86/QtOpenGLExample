@@ -1,6 +1,7 @@
 project(CreateOpenGLWindowExample)
 
 set(HDRS
+    CreateOpenGLWindowExample_global.h
     CreateOpenGLWindowExample.h
 )
 
@@ -13,3 +14,5 @@ add_library(CreateOpenGLWindowExample SHARED
 )
 
 target_link_libraries(CreateOpenGLWindowExample PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+target_compile_definitions(CreateOpenGLWindowExample PRIVATE CREATEOPENGLWINDOWEXAMPLE_LIBRARY)

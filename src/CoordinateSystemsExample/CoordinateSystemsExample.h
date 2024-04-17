@@ -1,7 +1,7 @@
 #ifndef COORDINATESYSTEMSEXAMPLE_H
 #define COORDINATESYSTEMSEXAMPLE_H
 
-#include <QtCore/qglobal.h>
+#include "CoordinateSystemsExample_global.h"
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
@@ -9,8 +9,9 @@
 #include <QOpenGLWidget>
 #include <QElapsedTimer>
 
-class Q_DECL_EXPORT CoordinateSystemsExample : public QOpenGLWidget
+class COORDINATESYSTEMSEXAMPLE_EXPORT CoordinateSystemsExample : public QOpenGLWidget
 {
+    Q_OBJECT
 public:
     CoordinateSystemsExample(QWidget *parent = nullptr);
     ~CoordinateSystemsExample();

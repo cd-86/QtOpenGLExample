@@ -1,6 +1,7 @@
 project(TexturesExample)
 
 set(HDRS
+    TexturesExample_global.h
     TexturesExample.h
 )
 
@@ -14,3 +15,4 @@ add_library(TexturesExample SHARED
 
 target_link_libraries(TexturesExample PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
+target_compile_definitions(TexturesExample PRIVATE TEXTURESEXAMPLE_LIBRARY)

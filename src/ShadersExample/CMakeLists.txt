@@ -1,6 +1,7 @@
 project(ShadersExample)
 
 set(HDRS
+    ShadersExample_global.h
     ShadersExample.h
 )
 
@@ -13,4 +14,6 @@ add_library(ShadersExample SHARED
 )
 
 target_link_libraries(ShadersExample PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+target_compile_definitions(ShadersExample PRIVATE SHADERSEXAMPLE_LIBRARY)
 

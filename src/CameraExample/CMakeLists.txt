@@ -1,6 +1,7 @@
 project(CameraExample)
 
 set(HDRS
+    CameraExample_global.h
     CameraExample.h
 )
 
@@ -13,4 +14,6 @@ add_library(CameraExample SHARED
 )
 
 target_link_libraries(CameraExample PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+target_compile_definitions(CameraExample PRIVATE CAMERAEXAMPLE_LIBRARY)
 
