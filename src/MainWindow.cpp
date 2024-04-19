@@ -11,6 +11,7 @@
 #include "ColorsExample/ColorsExample.h"
 #include "BasicLightingExample/BasicLightingExample.h"
 #include "MaterialsExample/MaterialsExample.h"
+#include "LightingMapsExample/LightingMapsExample.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_model->appendRow(new QStandardItem(QStringLiteral("颜色")));
     m_model->appendRow(new QStandardItem(QStringLiteral("基础光照")));
     m_model->appendRow(new QStandardItem(QStringLiteral("材质")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("光照贴图")));
 }
 
 MainWindow::~MainWindow()
@@ -72,6 +74,9 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
         break;
     case 9:
         newWindow = new MaterialsExample;
+        break;
+    case 10:
+        newWindow = new LightingMapsExample;
         break;
     }
     if (newWindow){
