@@ -12,6 +12,7 @@ set(SUB_LIB
     BasicLightingExample
     MaterialsExample
     LightingMapsExample
+    LightCastersExample
 )
 
 SUBDIRS(${SUB_LIB})
