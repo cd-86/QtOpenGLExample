@@ -1,6 +1,7 @@
 project(ColorsExample)
 
 set(HDRS
+    ColorsExample_global.h
     ColorsExample.h
     Camera.h
 )

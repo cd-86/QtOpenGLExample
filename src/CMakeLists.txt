@@ -9,6 +9,7 @@ set(SUB_LIB
     CoordinateSystemsExample
     CameraExample
     ColorsExample
+    BasicLightingExample
 )
 
 SUBDIRS(${SUB_LIB})

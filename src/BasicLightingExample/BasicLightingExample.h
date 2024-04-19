@@ -1,7 +1,7 @@
-﻿#ifndef COLORSEXAMPLE_H
-#define COLORSEXAMPLE_H
+﻿#ifndef BASICLIGHTINGEXAMPLE_H
+#define BASICLIGHTINGEXAMPLE_H
 
-#include "ColorsExample_global.h"
+#include "BasicLightingExample_global.h"
 #include <QOpenGLBuffer>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
@@ -10,12 +10,12 @@
 
 #include "Camera.h"
 
-class COLORSEXAMPLE_EXPORT ColorsExample : public QOpenGLWidget
+class BASICLIGHTINGEXAMPLE_EXPORT BasicLightingExample : public QOpenGLWidget
 {
     Q_OBJECT
 public:
-    explicit ColorsExample(QWidget *parent = nullptr);
-    ~ColorsExample();
+    explicit BasicLightingExample(QWidget *parent = nullptr);
+    ~BasicLightingExample();
 
 protected:
     // QObject interface
@@ -51,4 +51,4 @@ public:
     } keys;
 };
 
-#endif // COLORSEXAMPLE_H
+#endif // BASICLIGHTINGEXAMPLE_H

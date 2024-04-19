@@ -1,17 +1,17 @@
-﻿#include "ColorsExample.h"
+﻿#include "BasicLightingExample.h"
 
 #include <QKeyEvent>
 #include <QOpenGLFunctions>
 #include <QPainter>
 #include <QtMath>
 
-ColorsExample::ColorsExample(QWidget *parent) :
+BasicLightingExample::BasicLightingExample(QWidget *parent) :
     QOpenGLWidget(parent)
 {
     setMouseTracking(true);
 }
 
-ColorsExample::~ColorsExample()
+BasicLightingExample::~BasicLightingExample()
 {
     makeCurrent();
     lightVao.destroy();
@@ -20,7 +20,7 @@ ColorsExample::~ColorsExample()
     doneCurrent();
 }
 
-void ColorsExample::timerEvent(QTimerEvent *event)
+void BasicLightingExample::timerEvent(QTimerEvent *event)
 {
     float s = time.restart() / 1000.f;
     if (keys.W)
@@ -35,18 +35,18 @@ void ColorsExample::timerEvent(QTimerEvent *event)
     update();
 }
 
-void ColorsExample::enterEvent(QEvent *event)
+void BasicLightingExample::enterEvent(QEvent *event)
 {
     // 隐藏鼠标指针，将指针置于窗口中心
     setCursor(Qt::BlankCursor);
     QCursor::setPos(mapToGlobal(rect().center()));
 }
 
-void ColorsExample::leaveEvent(QEvent *event)
+void BasicLightingExample::leaveEvent(QEvent *event)
 {
 }
 
-void ColorsExample::mouseMoveEvent(QMouseEvent *event)
+void BasicLightingExample::mouseMoveEvent(QMouseEvent *event)
 {
     float xoffset = rect().center().x() - event->x();
     float yoffset = rect().center().y() - event->y();
@@ -61,7 +61,7 @@ void ColorsExample::mouseMoveEvent(QMouseEvent *event)
     QCursor::setPos(mapToGlobal(rect().center()));
 }
 
-void ColorsExample::wheelEvent(QWheelEvent *event)
+void BasicLightingExample::wheelEvent(QWheelEvent *event)
 {
     float f = event->angleDelta().y() > 0 ? 1.0f : -1.0f;
     camera.ProcessMouseScroll(f);
@@ -69,7 +69,7 @@ void ColorsExample::wheelEvent(QWheelEvent *event)
     projection.perspective(camera.Zoom, float(width()) / float(height()), 0.1f, 100.f);
 }
 
-void ColorsExample::keyPressEvent(QKeyEvent *event)
+void BasicLightingExample::keyPressEvent(QKeyEvent *event)
 {
     switch(event->key()) {
     case Qt::Key_W:
@@ -89,7 +89,7 @@ void ColorsExample::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void ColorsExample::keyReleaseEvent(QKeyEvent *event)
+void BasicLightingExample::keyReleaseEvent(QKeyEvent *event)
 {
     switch(event->key()) {
     case Qt::Key_W:
@@ -109,63 +109,63 @@ void ColorsExample::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
-void ColorsExample::initializeGL()
+void BasicLightingExample::initializeGL()
 {
     QOpenGLFunctions *f = context()->functions();
     f->glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    lightingShader.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/colors/colors.vs");
-    lightingShader.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/colors/colors.fs");
+    lightingShader.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/basic_lighting/basic_lighting.vs");
+    lightingShader.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/basic_lighting/basic_lighting.fs");
     if(!lightingShader.link()) {
         qDebug() << lightingShader.log();
     };
-    lightCubeShader.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/colors/light_cube.vs");
-    lightCubeShader.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/colors/light_cube.fs");
+    lightCubeShader.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/basic_lighting/light_cube.vs");
+    lightCubeShader.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/basic_lighting/light_cube.fs");
     if(!lightCubeShader.link()) {
         qDebug() << lightCubeShader.log();
     };
     // 顶点数据
     float vertices[] = {
-        -0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f,  0.5f, -0.5f,
-        0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-        -0.5f, -0.5f,  0.5f,
-        0.5f, -0.5f,  0.5f,
-        0.5f,  0.5f,  0.5f,
-        0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-        0.5f,  0.5f,  0.5f,
-        0.5f,  0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f,  0.5f,
-        0.5f,  0.5f,  0.5f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-        -0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f, -0.5f,
-        0.5f, -0.5f,  0.5f,
-        0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-        -0.5f,  0.5f, -0.5f,
-        0.5f,  0.5f, -0.5f,
-        0.5f,  0.5f,  0.5f,
-        0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
     };
     vbo.create();
     vbo.bind();
@@ -173,17 +173,19 @@ void ColorsExample::initializeGL()
 
     cubeVao.create();
     cubeVao.bind();
-    lightCubeShader.enableAttributeArray(0);
-    lightCubeShader.setAttributeBuffer(0, GL_FLOAT, 0, 3, 3 * sizeof(float));
+    lightingShader.enableAttributeArray(0);
+    lightingShader.setAttributeBuffer(0, GL_FLOAT, 0, 3, 6 * sizeof(float));
+    lightingShader.enableAttributeArray(1);
+    lightingShader.setAttributeBuffer(1, GL_FLOAT, 3 * sizeof(float), 3, 6 * sizeof(float));
 
     lightVao.create();
     lightVao.bind();
     lightCubeShader.enableAttributeArray(0);
-    lightCubeShader.setAttributeBuffer(0, GL_FLOAT, 0, 3, 3 * sizeof(float));
+    lightCubeShader.setAttributeBuffer(0, GL_FLOAT, 0, 3, 6 * sizeof(float));
     startTimer(1);
 }
 
-void ColorsExample::resizeGL(int w, int h)
+void BasicLightingExample::resizeGL(int w, int h)
 {
     QOpenGLFunctions *f = context()->functions();
     f->glViewport(0, 0, w, h);
@@ -191,7 +193,7 @@ void ColorsExample::resizeGL(int w, int h)
     projection.perspective(camera.Zoom, float(w) / float(h), 0.1f, 100.f);
 }
 
-void ColorsExample::paintGL()
+void BasicLightingExample::paintGL()
 {
     QOpenGLFunctions* f = context()->functions();
     f->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -201,6 +203,8 @@ void ColorsExample::paintGL()
     lightingShader.bind();
     lightingShader.setUniformValue("uObjectColor", 1.0f, 0.5f, 0.31f);
     lightingShader.setUniformValue("uLightColor", 1.0f, 1.0f, 1.0f);
+    lightingShader.setUniformValue("uLightPos", lightPos);
+    lightingShader.setUniformValue("uViewPos", camera.Position);
     lightingShader.setUniformValue("uProjection", projection);
     lightingShader.setUniformValue("uView", view);
     lightingShader.setUniformValue("uModel", QMatrix4x4());

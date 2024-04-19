@@ -1,4 +1,4 @@
-#include "MainWindow.h"
+﻿#include "MainWindow.h"
 #include "ui_MainWindow.h"
 
 #include "CreateOpenGLWindowExample/CreateOpenGLWindowExample.h"
@@ -9,6 +9,7 @@
 #include "CoordinateSystemsExample/CoordinateSystemsExample.h"
 #include "CameraExample/CameraExample.h"
 #include "ColorsExample/ColorsExample.h"
+#include "BasicLightingExample/BasicLightingExample.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,14 +20,15 @@ MainWindow::MainWindow(QWidget *parent)
     m_model = new QStandardItemModel(this);
     ui->listView->setModel(m_model);
     ui->listView->setEditTriggers(QListView::NoEditTriggers);
-    m_model->appendRow(new QStandardItem("Create OpenGLWidget"));
-    m_model->appendRow(new QStandardItem("Hello Triangle"));
-    m_model->appendRow(new QStandardItem("Shaders"));
-    m_model->appendRow(new QStandardItem("Textures"));
-    m_model->appendRow(new QStandardItem("Transformations"));
-    m_model->appendRow(new QStandardItem("Coordinate Systems"));
-    m_model->appendRow(new QStandardItem("Camera"));
-    m_model->appendRow(new QStandardItem("Colors"));
+    m_model->appendRow(new QStandardItem(QStringLiteral("创建OpenGL窗口")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("你好三角形")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("着色器")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("纹理")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("变换")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("坐标系统")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("摄像机")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("颜色")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("基础光照")));
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +64,9 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
         break;
     case 7:
         newWindow = new ColorsExample;
+        break;
+    case 8:
+        newWindow = new BasicLightingExample;
         break;
     }
     if (newWindow){
