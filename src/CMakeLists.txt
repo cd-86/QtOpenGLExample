@@ -1,4 +1,4 @@
-project(QtOpenGLExamples VERSION 0.1 LANGUAGES CXX)
+﻿project(QtOpenGLExamples VERSION 0.1 LANGUAGES CXX)
 
 set(SUB_LIB
     CreateOpenGLWindowExample
@@ -10,6 +10,7 @@ set(SUB_LIB
     CameraExample
     ColorsExample
     BasicLightingExample
+    MaterialsExample
 )
 
 SUBDIRS(${SUB_LIB})

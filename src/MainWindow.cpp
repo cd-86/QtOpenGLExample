@@ -10,6 +10,7 @@
 #include "CameraExample/CameraExample.h"
 #include "ColorsExample/ColorsExample.h"
 #include "BasicLightingExample/BasicLightingExample.h"
+#include "MaterialsExample/MaterialsExample.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -29,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_model->appendRow(new QStandardItem(QStringLiteral("摄像机")));
     m_model->appendRow(new QStandardItem(QStringLiteral("颜色")));
     m_model->appendRow(new QStandardItem(QStringLiteral("基础光照")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("材质")));
 }
 
 MainWindow::~MainWindow()
@@ -67,6 +69,9 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
         break;
     case 8:
         newWindow = new BasicLightingExample;
+        break;
+    case 9:
+        newWindow = new MaterialsExample;
         break;
     }
     if (newWindow){
