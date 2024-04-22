@@ -1,4 +1,4 @@
-#ifndef CREATEOPENGLWINDOWEXAMPLE_H
+﻿#ifndef CREATEOPENGLWINDOWEXAMPLE_H
 #define CREATEOPENGLWINDOWEXAMPLE_H
 
 #include "CreateOpenGLWindowExample_global.h"
@@ -18,4 +18,5 @@ protected:
     virtual void resizeGL(int w, int h) override;
     virtual void paintGL() override;
 };
+
 #endif // CREATEOPENGLWINDOWEXAMPLE_H

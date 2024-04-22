@@ -13,6 +13,7 @@
 #include "MaterialsExample/MaterialsExample.h"
 #include "LightingMapsExample/LightingMapsExample.h"
 #include "LightCastersExample/LightCastersExample.h"
+#include "MultipleLightsExample/MultipleLightsExample.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_model->appendRow(new QStandardItem(QStringLiteral("材质")));
     m_model->appendRow(new QStandardItem(QStringLiteral("光照贴图")));
     m_model->appendRow(new QStandardItem(QStringLiteral("投光物")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("多光源")));
 }
 
 MainWindow::~MainWindow()
@@ -82,6 +84,9 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
         break;
     case 11:
         newWindow = new LightCastersExample;
+        break;
+    case 12:
+        newWindow = new MultipleLightsExample;
         break;
     }
     if (newWindow){

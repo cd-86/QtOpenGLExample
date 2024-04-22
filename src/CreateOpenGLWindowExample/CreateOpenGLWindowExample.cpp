@@ -1,4 +1,4 @@
-#include "CreateOpenGLWindowExample.h"
+﻿#include "CreateOpenGLWindowExample.h"
 
 #include <QOpenGLFunctions>
 
