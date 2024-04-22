@@ -1,0 +1,6 @@
+[submodule "third/freetype"]
+	path = third/freetype
+	url = https://gitlab.freedesktop.org/freetype/freetype.git
+[submodule "third/assimp"]
+	path = third/assimp
+	url = https://github.com/assimp/assimp.git
