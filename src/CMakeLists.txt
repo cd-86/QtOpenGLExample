@@ -14,6 +14,7 @@ set(SUB_LIB
     LightingMapsExample
     LightCastersExample
     MultipleLightsExample
+    TextRenderingExample
 )
 
 SUBDIRS(${SUB_LIB})
