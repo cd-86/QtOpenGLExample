@@ -70,7 +70,6 @@ void FontFace::getVertexData(QVector<QVector4D> &vertex, QVector<uint32_t> &inde
     } else if (alignment & Qt::AlignBottom) {
         y += w.size() * 48 * scale;
     }
-    qDebug() << y;
     x = w[0];
     int i = 0;
     int line = 0;

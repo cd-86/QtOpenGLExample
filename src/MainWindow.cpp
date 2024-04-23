@@ -15,6 +15,7 @@
 #include "LightCastersExample/LightCastersExample.h"
 #include "MultipleLightsExample/MultipleLightsExample.h"
 #include "TextRenderingExample/TextRenderingExample.h"
+#include "ModelLoadingExample/ModelLoadingExample.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_model->appendRow(new QStandardItem(QStringLiteral("投光物")));
     m_model->appendRow(new QStandardItem(QStringLiteral("多光源")));
     m_model->appendRow(new QStandardItem(QStringLiteral("文本渲染")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("模型加载")));
 }
 
 MainWindow::~MainWindow()
@@ -92,6 +94,9 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
         break;
     case 13:
         newWindow = new TextRenderingExample;
+        break;
+    case 14:
+        newWindow = new ModelLoadingExample;
         break;
     }
     if (newWindow){

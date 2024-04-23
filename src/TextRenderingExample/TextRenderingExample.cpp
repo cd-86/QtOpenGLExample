@@ -52,8 +52,6 @@ void TextRenderingExample::initializeGL()
     shaderProgram.setUniformValue("uFontColor", QColor(128, 200, 150));
     shaderProgram.setUniformValue("uFontTextureSize", fontFace.textureWidth(), fontFace.textureHeight());
     count = indices.size();
-
-
 }
 
 void TextRenderingExample::resizeGL(int w, int h)
