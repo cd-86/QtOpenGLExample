@@ -4,3 +4,6 @@
 [submodule "third/assimp"]
 	path = third/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "third/bullet3"]
+	path = third/bullet3
+	url = https://github.com/bulletphysics/bullet3.git

@@ -1,0 +1,12 @@
+﻿#ifndef PICKEXAMPLE_GLOBAL_H
+#define PICKEXAMPLE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(PICKEXAMPLE_LIBRARY)
+#define PICKEXAMPLE_EXPORT Q_DECL_EXPORT
+#else
+#define PICKEXAMPLE_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // PICKEXAMPLE_GLOBAL_H

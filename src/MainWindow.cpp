@@ -16,6 +16,7 @@
 #include "MultipleLightsExample/MultipleLightsExample.h"
 #include "TextRenderingExample/TextRenderingExample.h"
 #include "ModelLoadingExample/ModelLoadingExample.h"
+#include "PickExample/PickExample.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -41,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_model->appendRow(new QStandardItem(QStringLiteral("多光源")));
     m_model->appendRow(new QStandardItem(QStringLiteral("文本渲染")));
     m_model->appendRow(new QStandardItem(QStringLiteral("模型加载")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("拾取")));
 }
 
 MainWindow::~MainWindow()
@@ -98,6 +100,9 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
     case 14:
         newWindow = new ModelLoadingExample;
         break;
+    case 15:
+        newWindow = new PickExample;
+        break;
     }
     if (newWindow){
         if (w) {
@@ -105,6 +110,8 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
             newWindow->move(w->pos());
             w->close();
             delete w;
+        } else {
+            newWindow->resize(800, 600);
         }
         w = newWindow;
         w->setWindowTitle(index.data().toString());

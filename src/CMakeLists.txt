@@ -1,5 +1,7 @@
 ﻿project(QtOpenGLExamples VERSION 0.1 LANGUAGES CXX)
 
+INCLUDE_DIRECTORIES( ${BULLET_PHYSICS_SOURCE_DIR}/src  )
+
 set(SUB_LIB
     CreateOpenGLWindowExample
     HelloTriangleExample
@@ -16,6 +18,7 @@ set(SUB_LIB
     MultipleLightsExample
     TextRenderingExample
     ModelLoadingExample
+    PickExample
 )
 
 SUBDIRS(${SUB_LIB})
