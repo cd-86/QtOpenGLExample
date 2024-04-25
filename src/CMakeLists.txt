@@ -20,6 +20,7 @@ set(SUB_LIB
     ModelLoadingExample
     PickExample
     GeometryShaderExample
+    GeometryShaderExample2
 )
 
 SUBDIRS(${SUB_LIB})
