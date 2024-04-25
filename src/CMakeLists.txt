@@ -19,6 +19,7 @@ set(SUB_LIB
     TextRenderingExample
     ModelLoadingExample
     PickExample
+    GeometryShaderExample
 )
 
 SUBDIRS(${SUB_LIB})

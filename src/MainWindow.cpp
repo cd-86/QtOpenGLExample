@@ -17,6 +17,7 @@
 #include "TextRenderingExample/TextRenderingExample.h"
 #include "ModelLoadingExample/ModelLoadingExample.h"
 #include "PickExample/PickExample.h"
+#include "GeometryShaderExample/GeometryShaderExample.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -43,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_model->appendRow(new QStandardItem(QStringLiteral("文本渲染")));
     m_model->appendRow(new QStandardItem(QStringLiteral("模型加载")));
     m_model->appendRow(new QStandardItem(QStringLiteral("拾取")));
+    m_model->appendRow(new QStandardItem(QStringLiteral("几何着色器(计算法线)")));
 }
 
 MainWindow::~MainWindow()
@@ -102,6 +104,9 @@ void MainWindow::on_listView_doubleClicked(const QModelIndex &index)
         break;
     case 15:
         newWindow = new PickExample;
+        break;
+    case 16:
+        newWindow = new GeometryShaderExample;
         break;
     }
     if (newWindow){
