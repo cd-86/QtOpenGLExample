@@ -13,10 +13,13 @@ GeometryShaderExample::GeometryShaderExample(QWidget *parent) :
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setAlignment(Qt::AlignTop | Qt::AlignLeft);
 
-    normalChechBox = new QCheckBox(QStringLiteral("显示 法线"));
+    normalChechBox = new QCheckBox(QStringLiteral("法线"));
     layout->addWidget(normalChechBox);
+    meshCheckBox = new QCheckBox(QStringLiteral("网格/模型"));
+    layout->addWidget(meshCheckBox);
 
     connect(normalChechBox, &QCheckBox::clicked, this, [=](){update();});
+    connect(meshCheckBox, &QCheckBox::clicked, this, [=](){update();});
 }
 
 GeometryShaderExample::~GeometryShaderExample()
@@ -67,12 +70,19 @@ void GeometryShaderExample::initializeGL()
     if(!modelShader.link()) {
         qDebug() << modelShader.log();
     };
-    // 把三角型转为法线的着色器程序 (计算每个三角面的法线)
-    lineShader.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/geometry_shader/line.vs");
-    lineShader.addCacheableShaderFromSourceFile(QOpenGLShader::Geometry, "shaders/geometry_shader/line.geom");
-    lineShader.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/geometry_shader/line.fs");
-    if(!lineShader.link()) {
-        qDebug() << lineShader.log();
+    // 把三角型面转为法线的着色器程序 (计算每个三角面的法线)
+    normalShader.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/geometry_shader/normal.vs");
+    normalShader.addCacheableShaderFromSourceFile(QOpenGLShader::Geometry, "shaders/geometry_shader/normal.geom");
+    normalShader.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/geometry_shader/normal.fs");
+    if(!normalShader.link()) {
+        qDebug() << normalShader.log();
+    };
+    // 把三角型面转为线的的着色器程序
+    meshShader.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, "shaders/geometry_shader/mesh.vs");
+    meshShader.addCacheableShaderFromSourceFile(QOpenGLShader::Geometry, "shaders/geometry_shader/mesh.geom");
+    meshShader.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, "shaders/geometry_shader/mesh.fs");
+    if(!meshShader.link()) {
+        qDebug() << meshShader.log();
     };
     // 更新一次 view 矩阵
     view = camera.GetViewMatrix();
@@ -95,38 +105,44 @@ void GeometryShaderExample::paintGL()
     // 启用深度测试
     f->glEnable(GL_DEPTH_TEST);
 
-    modelShader.bind();
+    if (meshCheckBox->isChecked()) {
+        meshShader.bind();
+        meshShader.setUniformValue("uMatrix", mat);
+        ourModel->draw(meshShader);
+    } else {
+        modelShader.bind();
 
-    modelShader.setUniformValue("uViewPos", camera.Position);
-    // directional light
-    modelShader.setUniformValue("uShininess", 32.0f);
-    // 平行光
-    modelShader.setUniformValue("dirLight.direction", -0.001000f, 0.001000f, -0.999999f);
-    modelShader.setUniformValue("dirLight.ambient", 1.0f, 1.0f, 1.0f);
-    modelShader.setUniformValue("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
-    modelShader.setUniformValue("dirLight.specular", 0.5f, 0.5f, 0.5f);
-    // spotLight
-    modelShader.setUniformValue("spotLight.ambient", 0.0f, 0.0f, 0.0f);
-    modelShader.setUniformValue("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
-    modelShader.setUniformValue("spotLight.specular", 1.0f, 1.0f, 1.0f);
-    modelShader.setUniformValue("spotLight.constant", 1.0f);
-    modelShader.setUniformValue("spotLight.linear", 0.09f);;
-    modelShader.setUniformValue("spotLight.quadratic", 0.032f);
-    modelShader.setUniformValue("spotLight.cutOff", cosf(qDegreesToRadians(12.5f)));
-    modelShader.setUniformValue("spotLight.outerCutOff", cosf(qDegreesToRadians(30.0f)));
+        modelShader.setUniformValue("uViewPos", camera.Position);
+        // directional light
+        modelShader.setUniformValue("uShininess", 32.0f);
+        // 平行光
+        modelShader.setUniformValue("dirLight.direction", -0.001000f, 0.001000f, -0.999999f);
+        modelShader.setUniformValue("dirLight.ambient", 1.0f, 1.0f, 1.0f);
+        modelShader.setUniformValue("dirLight.diffuse", 0.4f, 0.4f, 0.4f);
+        modelShader.setUniformValue("dirLight.specular", 0.5f, 0.5f, 0.5f);
+        // spotLight
+        modelShader.setUniformValue("spotLight.ambient", 0.0f, 0.0f, 0.0f);
+        modelShader.setUniformValue("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
+        modelShader.setUniformValue("spotLight.specular", 1.0f, 1.0f, 1.0f);
+        modelShader.setUniformValue("spotLight.constant", 1.0f);
+        modelShader.setUniformValue("spotLight.linear", 0.09f);;
+        modelShader.setUniformValue("spotLight.quadratic", 0.032f);
+        modelShader.setUniformValue("spotLight.cutOff", cosf(qDegreesToRadians(12.5f)));
+        modelShader.setUniformValue("spotLight.outerCutOff", cosf(qDegreesToRadians(30.0f)));
 
-    modelShader.setUniformValue("spotLight.position", camera.Position);
-    modelShader.setUniformValue("spotLight.direction", camera.Front);
-    modelShader.setUniformValue("uViewPos", camera.Position);
+        modelShader.setUniformValue("spotLight.position", camera.Position);
+        modelShader.setUniformValue("spotLight.direction", camera.Front);
+        modelShader.setUniformValue("uViewPos", camera.Position);
 
-    modelShader.setUniformValue("uMatrix", mat);
-    modelShader.setUniformValue("uModel", QMatrix4x4());
-    modelShader.setUniformValue("uNormalMatrix", QMatrix3x3());
-    ourModel->draw(modelShader);
+        modelShader.setUniformValue("uMatrix", mat);
+        modelShader.setUniformValue("uModel", QMatrix4x4());
+        modelShader.setUniformValue("uNormalMatrix", QMatrix3x3());
+        ourModel->draw(modelShader);
+    }
 
     if (normalChechBox->isChecked()) {
-        lineShader.bind();
-        lineShader.setUniformValue("uMatrix", mat);
-        ourModel->draw(lineShader);
+        normalShader.bind();
+        normalShader.setUniformValue("uMatrix", mat);
+        ourModel->draw(normalShader);
     }
 }

@@ -29,9 +29,11 @@ protected:
 
 public:
     QCheckBox *normalChechBox;
+    QCheckBox *meshCheckBox;
 
     QOpenGLShaderProgram modelShader;
-    QOpenGLShaderProgram lineShader;
+    QOpenGLShaderProgram normalShader;
+    QOpenGLShaderProgram meshShader;
     Model *ourModel;
     QMatrix4x4 projection;
     QMatrix4x4 view;
